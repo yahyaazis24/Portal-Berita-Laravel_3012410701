@@ -1,48 +1,74 @@
 @extends('master')
 
-@section('title', 'Halaman Utama Portal - Kabar Burung')
+@section('title', 'Semua Berita')
 
 @section('body')
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="text-center mb-5">
 
-    <h1>Portal - Kabar Burung</h1>
+    <h1 class="fw-bold">
+        📰 Semua Berita
+    </h1>
 
-    <form action="/logout" method="POST">
-        @csrf
-        <button class="btn btn-danger">
-            Logout
-        </button>
-    </form>
+    <p class="text-muted">
+        Kumpulan berita terbaru dari Portal Kabar Burung
+    </p>
 
-</div
+</div>
 
-<table class="table table-hover table-striped">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Title</th>
-            <th>Published</th>
-            <th>Tanggal</th>
-        </tr>
-    </thead>
+<div class="row">
 
-    <tbody>
+@foreach($posts as $post)
 
-    <?php $no = 1; ?>
+<div class="col-lg-4 col-md-6 mb-4">
 
-    @foreach($posts as $post)
+<div class="card shadow h-100 border-0">
 
-        <tr>
-            <td>{{ $no++ }}</td>
-            <td>{{ $post->title }}</td>
-            <td>{{ $post->published }}</td>
-            <td>{{ $post->created_at->format('M d, Y') }}</td>
-        </tr>
+<img
+src="https://picsum.photos/500/300?random={{ $post->id }}"
+class="card-img-top">
 
-    @endforeach
+<div class="card-body">
 
-    </tbody>
-</table>
+<h4 class="fw-bold">
+
+{{ $post->title }}
+
+</h4>
+
+<p class="text-muted">
+
+👤 {{ $post->published }}
+
+</p>
+
+<p class="text-muted">
+
+📅 {{ $post->created_at->format('d M Y') }}
+
+</p>
+
+<p>
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
+Quisquam, voluptatibus.
+
+</p>
+
+<button class="btn btn-primary">
+
+Baca Selengkapnya
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+@endforeach
+
+</div>
 
 @endsection
