@@ -1,5 +1,9 @@
 @extends('master')
 
+@php
+use Illuminate\Support\Str;
+@endphp
+
 @section('title', 'Semua Berita')
 
 @section('body')
@@ -25,7 +29,7 @@
 <div class="card shadow h-100 border-0">
 
 <img
-src="https://picsum.photos/500/300?random={{ $post->id }}"
+src="{{ $post->image }}"
 class="card-img-top">
 
 <div class="card-body">
@@ -49,10 +53,7 @@ class="card-img-top">
 </p>
 
 <p>
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit.
-Quisquam, voluptatibus.
-
+{{ Str::limit($post->content, 120) }}
 </p>
 
 <button class="btn btn-primary">
