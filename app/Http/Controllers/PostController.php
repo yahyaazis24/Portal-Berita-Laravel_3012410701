@@ -20,4 +20,11 @@ class PostController extends Controller
 
     return view('home', compact('posts'));
 }
+
+public function dashboard()
+{
+    $posts = Post::latest()->get();
+
+    return view('dashboard', compact('posts'));
+}
 }

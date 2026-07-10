@@ -1,87 +1,119 @@
 @extends('master')
 
-@section('title','Dashboard')
+@section('title', 'Dashboard Admin')
 
 @section('body')
 
-<div class="text-center mb-5">
-
-<h1 class="fw-bold">
-Dashboard Admin
+<h1 class="fw-bold mb-4">
+    Dashboard Admin
 </h1>
 
-<p class="text-muted">
-
-Selamat datang,
-
-<strong>{{ Auth::user()->name }}</strong>
-
+<p class="text-muted mb-5">
+    Selamat datang,
+    <strong>{{ Auth::user()->name }}</strong>
 </p>
 
+<div class="row mb-5">
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow border-0">
+            <div class="card-body text-center">
+                <h2 class="text-primary">
+                    {{ \App\Models\Post::count() }}
+                </h2>
+                <p>Total Berita</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow border-0">
+            <div class="card-body text-center">
+                <h2 class="text-success">
+                    {{ Auth::user()->name }}
+                </h2>
+                <p>Administrator</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow border-0">
+            <div class="card-body text-center">
+                <h2 class="text-danger">
+                    {{ date('d M Y') }}
+                </h2>
+                <p>Tanggal Hari Ini</p>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<h3 class="mb-3">
+    Menu Cepat
+</h3>
 
 <div class="row">
 
-<div class="col-md-4">
+    <div class="col-md-4 mb-3">
+        <a href="/posts" class="btn btn-primary w-100 py-3">
+            📰 Lihat Semua Berita
+        </a>
+    </div>
 
-<div class="card shadow">
+    <div class="col-md-4 mb-3">
+        <button class="btn btn-success w-100 py-3">
+            ➕ Tambah Berita
+        </button>
+    </div>
 
-<div class="card-body text-center">
-
-<h2>
-
-{{ \App\Models\Post::count() }}
-
-</h2>
-
-<p>Total Berita</p>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="card shadow">
-
-<div class="card-body text-center">
-
-<h2>
-
-{{ Auth::user()->name }}
-
-</h2>
-
-<p>Administrator</p>
+    <div class="col-md-4 mb-3">
+        <a href="/" class="btn btn-dark w-100 py-3">
+            🏠 Kembali ke Home
+        </a>
+    </div>
 
 </div>
 
-</div>
+<hr class="my-5">
 
-</div>
+<h3 class="mb-4">
+    Berita Terbaru
+</h3>
 
-<div class="col-md-4">
+<table class="table table-bordered table-hover">
 
-<div class="card shadow">
+<thead class="table-primary">
 
-<div class="card-body text-center">
+<tr>
 
-<h2>
+<th>No</th>
+<th>Judul</th>
+<th>Publisher</th>
 
-{{ date('d M Y') }}
+</tr>
 
-</h2>
+</thead>
 
-<p>Tanggal</p>
+<tbody>
 
-</div>
+@foreach($posts as $post)
 
-</div>
+<tr>
 
-</div>
+<td>{{ $loop->iteration }}</td>
 
-</div>
+<td>{{ $post->title }}</td>
+
+<td>{{ $post->published }}</td>
+
+</tr>
+
+@endforeach
+
+</tbody>
+
+</table>
 
 @endsection
